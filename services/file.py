@@ -10,6 +10,57 @@ import pptx
 
 from models.models import Document, DocumentMetadata
 
+async def get_document_from_local_file(
+    filename: str, file_content: bytes, metadata: DocumentMetadata
+) -> Document:
+    mimetype, _ = mimetypes.guess_type(filename)
+    if mimetype is None and filename.endswith(".md"):
+        mimetype = "text/markdown"
+    elif mimetype is None:
+        raise Exception("Unsupported file type")
+
+    extracted_text = extract_text_from_local_file(file_content, mimetype)
+
+    doc = Document(text=extracted_text, metadata=metadata)
+
+    return doc
+
+
+def extract_text_from_local_file(file_content: bytes, mimetype: str) -> str:
+    if mimetype == "application/pdf":
+        # Extract text from pdf using PyPDF2
+        reader = PdfReader(file_content)
+        extracted_text = " ".join([page.extract_text() for page in reader.pages])
+    elif mimetype == "text/plain" or mimetype == "text/markdown":
+        # Read text from plain text file
+        extracted_text = file_content.decode("utf-8")
+    elif mimetype == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        # Extract text from docx using docx2txt
+        extracted_text = docx2txt.process(file_content)
+    elif mimetype == "text/csv":
+        # Extract text from csv using csv module
+        extracted_text = ""
+        decoded_buffer = (line.decode("utf-8") for line in file_content)
+        reader = csv.reader(decoded_buffer)
+        for row in reader:
+            extracted_text += " ".join(row) + "\n"
+    elif mimetype == "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+        # Extract text from pptx using python-pptx
+        extracted_text = ""
+        presentation = pptx.Presentation(file_content)
+        for slide in presentation.slides:
+            for shape in slide.shapes:
+                if shape.has_text_frame:
+                    for paragraph in shape.text_frame.paragraphs:
+                        for run in paragraph.runs:
+                            extracted_text += run.text + " "
+                    extracted_text += "\n"
+    else:
+        # Unsupported file type
+        raise ValueError("Unsupported file type: {}".format(mimetype))
+
+    return extracted_text
+
 
 async def get_document_from_file(
     file: UploadFile, metadata: DocumentMetadata
