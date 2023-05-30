@@ -1,6 +1,6 @@
 import os
 from datastore.factory import get_datastore
-from services.file import get_document_from_file
+from services.file import *
 from models.models import *
 import asyncio
 from services.file import *
@@ -23,8 +23,13 @@ async def process_directory(directory_path: str) -> List[Document]:
             try:
                 with open(filepath, "rb") as file:
                     file_content = file.read()
-                    metadata = DocumentMetadata(source=Source.file)
-                    document = await get_document_from_file(filename, file_content, metadata)
+
+                    base_name = os.path.basename(file.name)
+                    file_name_without_extension = os.path.splitext(base_name)[0]
+                    source_url = "https://www.offerzen.com/blog/" + file_name_without_extension
+
+                    metadata = DocumentMetadata(source=Source.file, source_id=file_name_without_extension, url=source_url)
+                    document = await get_document_from_local_file(filename, file_content, metadata)
                     documents.append(document)
             except Exception as e:
                 print(f"Error processing {filename}: {e}")
