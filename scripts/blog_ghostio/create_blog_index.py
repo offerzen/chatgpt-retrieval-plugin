@@ -4,7 +4,6 @@ from services.file import *
 from models.models import *
 import asyncio
 from services.file import *
-from fastapi import UploadFile
 from typing import List
 
 datastore = None
