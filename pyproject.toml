@@ -27,6 +27,9 @@ python-pptx = "^0.6.21"
 python-multipart = "^0.0.6"
 arrow = "^1.2.3"
 pinecone-client = "^2.1.0"
+beautifulsoup4 = "^4.12.2"
+bs4 = "^0.0.1"
+soupsieve = "^2.4.1"
 
 [tool.poetry.scripts]
 start = "server.main:start"
