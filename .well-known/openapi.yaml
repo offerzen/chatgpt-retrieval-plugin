@@ -4,7 +4,7 @@ info:
   description: A retrieval API for querying and filtering documents based on natural language queries and metadata
   version: 1.0.0
   servers:
-    - url: https://www.offerzen.com/ai
+    - url: https://retriever-production.herokuapp.com
 paths:
   /query:
     post:
