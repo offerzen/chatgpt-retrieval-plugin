@@ -4,7 +4,9 @@
   "name_for_human": "OfferZen world plugin",
   "description_for_model": "Plugin for searching through the documents (such as files, articles, and more) to find answers to questions and retrieve relevant information. Use it whenever a user asks something that might be relate to understanding tech careers, recruitment, and the OfferZen product",
   "description_for_human": "Search through all documents to help you navigate your career.",
-  "auth": "none",
+  "auth": {
+    "type": "none"
+  },
   "api": {
     "type": "openapi",
     "url": "https://www.offerzen.com/ai/.well-known/openapi.yaml",
