@@ -1,19 +1,16 @@
 {
   "schema_version": "v1",
   "name_for_model": "retrieval",
-  "name_for_human": "Retrieval Plugin",
-  "description_for_model": "Plugin for searching through the user's documents (such as files, emails, and more) to find answers to questions and retrieve relevant information. Use it whenever a user asks something that might be found in their personal information.",
-  "description_for_human": "Search through your documents.",
-  "auth": {
-    "type": "user_http",
-    "authorization_type": "bearer"
-  },
+  "name_for_human": "OfferZen world plugin",
+  "description_for_model": "Plugin for searching through the documents (such as files, articles, and more) to find answers to questions and retrieve relevant information. Use it whenever a user asks something that might be relate to understanding tech careers, recruitment, and the OfferZen product",
+  "description_for_human": "Search through all documents to help you navigate your career.",
+  "auth": "none",
   "api": {
     "type": "openapi",
-    "url": "https://your-app-url.com/.well-known/openapi.yaml",
+    "url": "https://www.offerzen.com/ai/.well-known/openapi.yaml",
     "has_user_authentication": false
   },
-  "logo_url": "https://your-app-url.com/.well-known/logo.png",
+  "logo_url": "https://www.offerzen.com/ai/.well-known/logo.png",
   "contact_email": "hello@contact.com", 
-  "legal_info_url": "http://example.com/legal-info"
+  "legal_info_url": "https://www.offerzen.com/privacy-centre"
 }
