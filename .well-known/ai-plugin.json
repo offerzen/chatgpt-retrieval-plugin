@@ -9,8 +9,7 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://www.offerzen.com/ai/offerzen-world/.well-known/openapi.yaml",
-    "has_user_authentication": false
+    "url": "https://www.offerzen.com/ai/offerzen-world/.well-known/openapi.yaml"
   },
   "logo_url": "https://www.offerzen.com/ai/offerzen-world/.well-known/logo.png",
   "contact_email": "hello@contact.com", 
